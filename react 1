@@ -1,0 +1,56 @@
+04/02/2025
+React js:
+•	Java script library
+•	Spa
+	All the updated
+	Tabs
+	Components: 
+	Filter
+	To install 
+Create element by using js:
+---document.createElement(‘h1’)
+Create element by using react- js:
+React.createElement(‘h1’)
+Syntax:
+React.createElaement(type,props)
+Type = tagname(h1,p,div)
+Prop=id,classname,onckick
+reactDom.createRoot()
+ReactDom.render()-method is used to diplay to the element
+Syntax:
+reactElement =what to render
+container = where to render
+a.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+    <div id="root"> </div>
+    <script src="a.js"></script>
+</body>
+</html>
+a.js:
+const b=React.createElement(
+    'h1' ,{id:'a'}, "iam sravan"
+);
+const element=document.getElementById('root')
+const root =ReactDOM.createRoot(element)
+
+root.render(b)
+jsx:
+javascript xml
+---it is a syntax extension for js
+----here we write the html code and this will     be translate into js
+--babel-tool
+Points:
+<br/>
+<img/>
+Class=className
+
+
