@@ -1,0 +1,108 @@
+npx-nope package executor
+npx create-react-my-app
+cd my-app  #change the directory
+npm start # to start  the react application
+public/index.html:  the main html file that server as the entry point for the app
+scr/index.js: the java script entry point  for the react app where the dom is rendered
+scr/app.js: the main component that servers as the root of the component tree
+act/component:
+
+components: (core building blocks of a react application)
+---the help to create the reusability  block of code
+1)	Class component
+2)	Functional component
+
+
+App.js:
+import React from 'react';
+import './App.css';
+import Welcome from './Welcome';
+
+const App=()=>{
+  return(
+    <div style={{textAlign:'center',color:'blue'}}>
+     < Welcome name="sravan"greeting="hello"/>
+     < Welcome name="sravan"greeting="hello"/>
+    </div>
+  )
+}
+export default App;
+
+/*const Welcome = () => <h1 classname="message">Hello sravan</h1>
+
+function App() {
+  return (
+    <div className='App'>
+      <Welcome/>
+    </div>
+  )
+}
+export default App;
+*/
+
+ 
+Welcome.js:
+import React from 'react';
+
+const Welcome =(props)=>{
+    const{name ,greeting}=props
+
+    return(
+        <h1 clasaName='message'>
+            {greeting},{name}
+        </h1>
+    )
+}
+export default Welcome;
+app.css:
+
+.message{
+  color:blue;
+  background-color: aquamarine;
+  font-size: 40px;
+  text-align: center;
+  width: 30%;
+  margin-left: 80px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
