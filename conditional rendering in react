@@ -1,0 +1,74 @@
+7/02.2025
+Components:
+Conditional rendering:
+App.js:
+import React from "react";
+import Greeting from "./Greeting";
+ 
+function App(){
+  const isLoggedIn = false;
+  return(
+    <div className="App">
+      <Greeting isLoggedln={isLoggedIn}/>
+    </div>
+  )
+}
+
+export default App;
+
+
+greeting.js:
+import React  from "react";
+
+function Greeting({isLoggedIn}){
+    if(isLoggedIn){
+        return <h1>Welcome Back!</h1>
+    }
+    else{
+        return <h1> Please Login</h1>
+    }
+}
+export default Greeting;
+lists and keys:
+keys- helps us to keep track of item in a list
+map() : elements in array
+--function will be applied to all elements
+
+App.js:
+import React from 'react';
+import FruitList from './FruitList';
+
+const App = () => {
+  return (
+    <div>
+      <h1>Welcome to the Fruit List App!</h1>
+      <FruitList />
+    </div>
+  );
+};
+
+export default App;
+FruitsList.js:
+import React from  'react';
+const FruitList=()=>{
+    const fruits = ['apple','cherry','orange','grapes'];
+    return(
+        <div>
+            <h1>FruitLIst</h1>
+            <ul>
+                {fruits.map((fruit,index)=>(
+                    <li key={index}>{fruit}</li>
+                ))}
+            </ul>
+        </div>
+    )
+}
+export default FruitList;
+output:
+Welcome to the Fruit List App!
+FruitLIst
+•	apple
+•	cherry
+•	orange
+•	grapes
+
