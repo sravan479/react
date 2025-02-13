@@ -1,0 +1,53 @@
+App.js:
+
+import React from "react";
+import './styles.css';
+
+const Profile = ({ user }) => {
+  return (
+    <div>
+      <h2>Profile</h2>
+      <p>Name: {user.name}</p>
+      <p>Email: {user.email}</p>
+    </div>
+  );
+};
+
+const NestedComponent = ({ user }) => {
+  return <Profile user={user} />;
+};
+
+const App = () => {
+  const user = { name: "Sravan", email: "sravanpuli@gmail.com" };
+  return <NestedComponent user={user} />;
+};
+
+export default App;
+
+
+style.css:
+
+.profile-card {
+  width: 320px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.profile-card h2 {
+  color: #2c3e50;
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
