@@ -1,0 +1,44 @@
+Use context();
+Props(properties) in react  are used to pass from parent component
+Pro drilling is the process of passing data from parent component to deeply child component  through intermediate component , by passing data as a props at each  of parent
+
+App.js: 
+//parent component
+function App(){
+  const data="Iam puli sravan kumar goud"
+  return(
+
+    <div>
+
+      <User1 data={data}/>
+    </div>
+  );
+
+}
+//user1 component
+function User1({data}){
+  return <User2 data={data}/>
+}
+//user 2 component
+function User2({data}){
+  return <User3 data={data}/>
+}
+//user3 component
+function User3({data}){
+  return <User4 data={data}/>
+}
+//user4 component
+function User4({data}){
+  return <div>{data}</div>
+}export default App;
+
+
+Output:
+Iam puli sravan kumar goud                                                                                                                                                                                                                                        
+
+
+
+
+
+
+
