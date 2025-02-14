@@ -1,0 +1,129 @@
+React reducer();
+A reducer is a function that helps to uodate (like score , a list) based on action  we take 
+1)
+import React, { useReducer } from "react"; 
+
+// Reducer function to track the number of apples
+function appleReducer(state, action) { 
+  switch (action.type) { 
+    case 'ADD_APPLE': 
+      return state + 1; 
+    case 'EAT_APPLE': 
+      return state > 0 ? state - 1 : 0; // Prevent negative apples
+    default: 
+      return state; 
+  } 
+} 
+
+function App() { 
+  const [count, dispatch] = useReducer(appleReducer, 3); 
+
+  return ( 
+    <div> 
+      <h1>Apple Counter</h1> 
+      <p>Number of apples: {count}</p> 
+      <button onClick={() => dispatch({ type: 'ADD_APPLE' })}>Add Apple</button> 
+      <button onClick={() => dispatch({ type: 'EAT_APPLE' })}>Eat Apple</button> 
+    </div> 
+  ); 
+} 
+
+export default App;
+      
+import React,{useReducer} from "react";
+
+function appleReducer(state={count:3, apples:[]},action){
+  switch(action.type){
+    case 'ADD_APPLE':
+      return {count: state.count+1, apples: [...state.apples, 'apple']};
+    case 'EAT_APPLE':
+      if(state.count > 0){
+        return {count: state.count-1, apples: state.apples.slice(0, -1)};
+      }
+      return state;
+    default:
+      return state;
+  }
+}
+function App() {
+  const [state,dispatch]=useReducer(appleReducer,{count:3, apples:[]})
+  return (
+    <div>
+      <h1>Apple counter</h1>
+      <p>Number of apples:{state.count}</p>
+      <div>
+        {state.apples.map((apple, index) => (
+          <img key={index} src="https://tse3.mm.bing.net/th?id=OIP.KhdGeX1d8QMmtow7Lm5AZAHaF1&pid=Api&P=0&h=180" alt="apple" />
+        ))}
+      </div>
+      <button onClick={()=>dispatch({type:'ADD_APPLE'})}>ADD APPLE</button>
+      <button onClick={()=>dispatch({type:'EAT_APPLE'})}>EAT APPLE</button>
+    </div>
+  )
+}
+export default App;
+                                                                                                                                                                                                                               
+ 
+
+
+
+import React, { useReducer } from "react";
+import "./App.css"; // Import CSS file
+
+// Reducer function to track the number of apples
+function appleReducer(state = 3, action) {
+  switch (action.type) {
+    case "ADD_APPLE":
+      return state + 1;
+    case "EAT_APPLE":
+      return state > 0 ? state - 1 : 0; // Prevent negative apples
+    default:
+      return state;
+  }
+}
+
+function App() {
+  const [state, dispatch] = useReducer(appleReducer, 3);
+
+  return (
+    <div className="container">
+      <h1>Apple Counter</h1>
+      <p className="apple-count">Number of apples: {state}</p>
+      <div className="apple-container">
+        {Array.from({ length: state }).map((_, index) => (
+          <img key={index} src="https://tse2.mm.bing.net/th?id=OIP.nKkm0wnm9J-Ko2rny3mAzAHaIo&pid=Api&P=0&h=180" alt="Apple" className="apple-image" />
+        ))}
+      </div>
+      <div className="button-group">
+        <button className="add-btn" onClick={() => dispatch({ type: "ADD_APPLE" })}>
+          Add Apple
+        </button>
+        <button className="eat-btn" onClick={() => dispatch({ type: "EAT_APPLE" })}>
+          Eat Apple
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+ 
+Callback in react:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
