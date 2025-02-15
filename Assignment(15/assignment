@@ -1,0 +1,198 @@
+App.js:
+import React, { createContext, useContext, useReducer, useState, useMemo } from "react";
+import "./App.css";
+
+// Define actions
+const ADD_TASK = "ADD_TASK";
+const REMOVE_TASK = "REMOVE_TASK";
+const CLEAR_TASKS = "CLEAR_TASKS";
+
+// Initial state
+const initialState = { tasks: [] };
+
+// Reducer function
+function taskReducer(state, action) {
+  switch (action.type) {
+    case ADD_TASK:
+      return { tasks: [...state.tasks, action.payload] };
+    case REMOVE_TASK:
+      return { tasks: state.tasks.filter((_, index) => index !== action.payload) };
+    case CLEAR_TASKS:
+      return { tasks: [] };
+    default:
+      return state;
+  }
+}
+
+// Create context
+const TaskContext = createContext();
+
+// Context provider
+function TaskProvider({ children }) {
+  const [state, dispatch] = useReducer(taskReducer, initialState);
+  return (
+    <TaskContext.Provider value={{ state, dispatch }}>{children}</TaskContext.Provider>
+  );
+}
+
+// Custom hook to use context
+function useTask() {
+  return useContext(TaskContext);
+}
+
+// Task List Component
+function TaskList() {
+  const { state, dispatch } = useTask();
+
+  // Memoized list to optimize rendering
+  const memoizedList = useMemo(() => state.tasks, [state.tasks]);
+
+  return (
+    <div className="card">
+      <h2>Task List ({memoizedList.length})</h2>
+      <ul>
+        {memoizedList.map((task, index) => (
+          <li key={index} className="list-item">
+            {task}
+            <button className="remove-button" onClick={() => dispatch({ type: REMOVE_TASK, payload: index })}>
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+      {memoizedList.length > 0 && (
+        <button className="clear-button" onClick={() => dispatch({ type: CLEAR_TASKS })}>
+          Remove All
+        </button>
+      )}
+    </div>
+  );
+}
+
+// Add Task Component
+function AddTask() {
+  const { dispatch } = useTask();
+  const [input, setInput] = useState("");
+
+  const handleAddTask = () => {
+    if (input.trim() !== "") {
+      dispatch({ type: ADD_TASK, payload: input });
+      setInput("");
+    }
+  };
+
+  return (
+    <div className="input-container">
+      <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Enter task" />
+      <button className="add-button" onClick={handleAddTask}>Add</button>
+    </div>
+  );
+}
+
+// Main App Component
+export default function App() {
+  return (
+    <TaskProvider>
+      <div className="app-container">
+        <h1>Task Manager</h1>
+        <AddTask />
+        <TaskList />
+      </div>
+    </TaskProvider>
+  );
+}
+
+
+APP.css:
+
+
+/* Container for the app */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f2f5; /* Keeping the background color */
+  min-height: 100vh;
+}
+
+/* Container for the input area */
+.input-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px; /* Keeping max-width */
+}
+
+/* Card style for lists and inputs */
+.card {
+  width: 100%;
+  max-width: 400px; /* Keeping max-width */
+  padding: 20px; /* Keeping padding */
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Keeping border-radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Keeping box-shadow */
+  background-color: #fff; /* Keeping background color */
+}
+
+/* List items style */
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0; /* Keeping padding */
+  border-bottom: 1px solid #eee; /* Keeping border color */
+  font-family: 'Arial', sans-serif; /* Keeping font-family */
+}
+
+/* Button styles */
+.add-button,
+.remove-button {
+  padding: 10px 15px; /* Keeping padding */
+  border: none;
+  border-radius: 5px; /* Keeping border-radius */
+  cursor: pointer;
+  font-family: 'Arial', sans-serif; /* Keeping font-family */
+  transition: background-color 0.3s ease; /* Keeping transition */
+}
+
+/* Add button style */
+.add-button {
+  background-color: #28a745; /* Green for Add button */
+  color: white;
+}
+
+.add-button:hover {
+  background-color: #218838; /* Darker green for hover effect */
+}
+
+/* Remove button style */
+.remove-button {
+  background-color: #dc3545; /* Red for Remove button */
+  color: white;
+}
+
+.remove-button:hover {
+  background-color: #c82333; /* Darker red for hover effect */
+}
+
+/* Clear button style */
+.clear-button {
+  background-color: #007bff; /* Blue for Clear button */
+  color: white;
+  padding: 10px 15px; /* Adding padding for consistency */
+  border: none;
+  border-radius: 5px; /* Keeping border-radius */
+  cursor: pointer;
+  font-family: 'Arial', sans-serif; /* Keeping font-family */
+  transition: background-color 0.3s ease; /* Keeping transition */
+}
+
+.clear-button:hover {
+  background-color: #0056b3; /* Darker blue for hover effect */
+}
+
+/* Task count style */
+h2 {
+  color: #ff851b; /* Orange for task count */
+}
