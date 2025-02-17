@@ -1,0 +1,93 @@
+Event handling in react :
+•	event handling in react is how you make your app do something when the user interaction with it, like clicking a button , submitting a form 
+•	clicking a button(on click)
+ex:
+import React from "react";
+
+function App() {
+  const handleClick = () => {
+    alert("Button clicked");
+  };
+
+  return (
+    <button onClick={handleClick}>Click me</button>
+  );
+}
+
+export default App;
+
+
+  how to use events in react:
+	use camel case for event names
+	pass a function  to the  event (not to a finction call)
+change event (on change);
+forms:
+this happens when you type in a text box
+key points:
+target is a property of the event object , and is predefined by  
+ex:
+import React, { useState } from "react";
+function App(){
+  const [text, setText]=useState("")
+    const handleChange = (Event) => {
+      setText(Event.target.value)
+  
+}
+return(
+  <div>
+    <input type="text" value={text}onChange={handleChange}/>
+    <p>Your Text:{text}</p>
+  </div>
+
+)
+}
+export default App;
+
+mouse event:
+import React, { useState } from "react";
+
+function App() {
+  const [isMoved, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  return (
+    <div>
+      <button
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          backgroundColor: isMoved ? "red" : "blue",
+          padding: "10px",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        Hover Me
+      </button>
+      {isMoved && <p>Mouse is moved</p>}
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
